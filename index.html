@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>버튼 웹사이트</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <title>weather-alert</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <script src="main.js"></script>
+  
 </head>
 <body>
-  <h1>버튼 클릭 예제</h1>
-  <button id="clickBtn">클릭해 보세요!</button>
-  <p id="msg"></p>
-
-  <script src="script.js"></script>
+  <div class="container">
+    <h1 class="weather-alert">
+      <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" alt="weather icon" />
+      weather-alert.
+    </h1>
+    <button id="start" type="button" class="start">로그인</button>
+    <script>
+      document.getElementById('start').addEventListener('click', function() {
+        window.location.href = 'login.html'; 
+      });
+    </script>
+  </div>
 </body>
 </html>
