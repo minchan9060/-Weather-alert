@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #4facfe, #00f2fe);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .weather-app {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      text-align: center;
+    }
+    .location {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .date-time {
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+    .temp {
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 20px 0 10px 0;
+    }
+    .weather-icon {
+      font-size: 5rem;
+    }
+    .weather-desc {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-transform: capitalize;
+    }
+    .details {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.9rem;
+    }
+    .detail-item {
+      text-align: center;
+    }
+    .detail-item span {
+      display: block;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="weather-app">
+    <div class="location" id="location">서울특별시</div>
+    <div class="date-time" id="dateTime">2025년 7월 22일 오후 3:00</div>
+
+    <div class="temp" id="temp">28℃</div>
+    <div class="weather-icon" id="weatherIcon">☀️</div> //🌤️⛅🌥️🌦️☁️🌧️⛈️🌩️☀️🌞⚡❄️🌨️☃️⛄🌬️💨🌪️🌫️🌈☔💧💦🌊🧣🧤🧊🥶🥵🔅☂️🌂
+    <div class="weather-desc" id="weatherDesc">맑음</div>
+
+    <div class="details">
+      <div class="detail-item">
+        습도
+        <span id="humidity">x%</span>
+      </div>
+      <div class="detail-item">
+        강수 확률
+        <span id="rainProb">x%</span>
+      </div>
+      <div class="detail-item">
+        바람
+        <span id="wind">xkm/h 북동풍</span>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function updateDateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    let hour = now.getHours();
+    const min = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hour >= 12 ? '오후' : '오전';
+    hour = hour % 12 || 12;
+    document.getElementById('dateTime').textContent = `${year}년 ${month}월 ${date}일 ${ampm} ${hour}:${min}`;
+  }
+  updateDateTime();
+  setInterval(updateDateTime, 60000);
+</script>
+
+</body>
+</html>
