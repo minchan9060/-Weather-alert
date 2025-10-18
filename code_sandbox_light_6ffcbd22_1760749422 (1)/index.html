@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨 예언 구슬 🔮</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 배경 별 효과 -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container">
+        <header>
+            <h1 class="title">🔮 날씨 예언 구슬</h1>
+            <p class="subtitle">구슬을 문질러 오늘의 날씨를 알아보세요</p>
+        </header>
+
+        <!-- 크리스탈 구슬 -->
+        <div class="crystal-ball-container">
+            <!-- 구슬 받침대 -->
+            <div class="ball-stand"></div>
+            
+            <!-- 크리스탈 구슬 -->
+            <div class="crystal-ball" id="crystalBall">
+                <!-- 구슬 표면 효과 -->
+                <div class="ball-surface"></div>
+                
+                <!-- 날씨 애니메이션 컨테이너 -->
+                <div class="weather-animation" id="weatherAnimation">
+                    <!-- 동적으로 생성됨 -->
+                </div>
+
+                <!-- 흐림 오버레이 (문지르면 사라짐) -->
+                <div class="fog-overlay" id="fogOverlay"></div>
+
+                <!-- 반짝임 효과 -->
+                <div class="sparkle"></div>
+                <div class="sparkle sparkle-2"></div>
+            </div>
+
+            <!-- 문지르기 진행도 -->
+            <div class="rub-progress" id="rubProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text">구슬을 문질러주세요 ✨</p>
+            </div>
+        </div>
+
+        <!-- 날씨 정보 -->
+        <div class="weather-info" id="weatherInfo">
+            <div class="location" id="location">
+                <span class="location-icon">📍</span>
+                <span id="locationName">위치 확인 중...</span>
+            </div>
+            
+            <div class="temperature" id="temperature">--°C</div>
+            
+            <div class="weather-description" id="weatherDescription">
+                날씨 정보를 불러오는 중...
+            </div>
+            
+            <div class="weather-details">
+                <div class="detail-item">
+                    <span class="detail-icon">💧</span>
+                    <div class="detail-info">
+                        <div class="detail-label">습도</div>
+                        <div class="detail-value" id="humidity">--%</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">💨</span>
+                    <div class="detail-info">
+                        <div class="detail-label">풍속</div>
+                        <div class="detail-value" id="windSpeed">-- m/s</div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon">🌡️</span>
+                    <div class="detail-info">
+                        <div class="detail-label">체감온도</div>
+                        <div class="detail-value" id="feelsLike">--°C</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API 소스 표시 -->
+            <div class="api-source" id="apiSource">
+                <small>데이터 출처: <span id="sourceName">--</span></small>
+            </div>
+        </div>
+
+        <!-- 로딩 오버레이 -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+            <p>날씨 정보를 불러오는 중...</p>
+        </div>
+
+        <!-- 에러 메시지 -->
+        <div class="error-message" id="errorMessage">
+            <p>❌ 날씨 정보를 불러올 수 없습니다.</p>
+            <button onclick="location.reload()">다시 시도</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>TOMORROW API 사용</p>
+    </footer>
+
+    <script src="js/weather-animations.js"></script>
+    <script src="js/weather-api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

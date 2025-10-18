@@ -1,0 +1,506 @@
+/* 전역 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-purple: #6b46c1;
+    --secondary-blue: #2563eb;
+    --dark-bg: #0f0c29;
+    --darker-bg: #0a0714;
+    --glow-color: #a78bfa;
+    --text-light: #e5e7eb;
+    --text-dim: #9ca3af;
+}
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1147 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 별 배경 애니메이션 */
+.stars, .stars2, .stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stars {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><circle cx="1" cy="1" r="1" fill="white" opacity="0.8"/></svg>') repeat;
+    animation: twinkle 200s linear infinite;
+}
+
+.stars2 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3"><circle cx="1.5" cy="1.5" r="1" fill="white" opacity="0.6"/></svg>') repeat;
+    animation: twinkle 400s linear infinite;
+}
+
+.stars3 {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><circle cx="2" cy="2" r="1.5" fill="white" opacity="0.4"/></svg>') repeat;
+    animation: twinkle 600s linear infinite;
+}
+
+@keyframes twinkle {
+    from { transform: translateY(0); }
+    to { transform: translateY(-2000px); }
+}
+
+/* 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 헤더 */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(167, 139, 250, 0.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    font-weight: 400;
+}
+
+/* 크리스탈 구슬 컨테이너 */
+.crystal-ball-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 4rem auto;
+    position: relative;
+}
+
+/* 크리스탈 구슬 */
+.crystal-ball {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    position: relative;
+    cursor: grab;
+    background: radial-gradient(circle at 30% 30%, rgba(167, 139, 250, 0.3), rgba(96, 165, 250, 0.2), rgba(15, 12, 41, 0.9));
+    box-shadow: 
+        0 0 60px rgba(167, 139, 250, 0.6),
+        inset 0 0 80px rgba(167, 139, 250, 0.3),
+        inset 0 -50px 100px rgba(96, 165, 250, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(167, 139, 250, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+}
+
+.crystal-ball:active {
+    cursor: grabbing;
+}
+
+.crystal-ball:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 0 80px rgba(167, 139, 250, 0.8),
+        inset 0 0 100px rgba(167, 139, 250, 0.4);
+}
+
+/* 구슬 표면 효과 */
+.ball-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        transparent 50%);
+    pointer-events: none;
+}
+
+/* 날씨 애니메이션 컨테이너 */
+.weather-animation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.weather-animation.visible {
+    opacity: 1;
+}
+
+/* 흐림 오버레이 */
+.fog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(15, 12, 41, 0.95) 0%, rgba(15, 12, 41, 0.7) 100%);
+    backdrop-filter: blur(20px);
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.fog-overlay.clearing {
+    opacity: 0;
+}
+
+/* 반짝임 효과 */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: sparkle 2s infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sparkle-2 {
+    animation-delay: 1s;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* 구슬 받침대 */
+.ball-stand {
+    position: absolute;
+    top: 385px; /* 400px(구슬 아래) + 20px 올림 */
+    width: 300px;
+    height: 40px;
+    background: linear-gradient(135deg, #2d2654, #1f1b3d);
+    box-shadow:
+      0 8px 15px rgba(0, 0, 0, 0.6),
+      inset 0 2px 8px rgba(167, 139, 250, 0.5);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    z-index: 1;
+  
+    clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);
+  }
+
+/* 문지르기 진행도 */
+.rub-progress {
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.rub-progress.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.progress-bar {
+    width: 300px;
+    height: 8px;
+    background: rgba(167, 139, 250, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+}
+
+.progress-text {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-weight: 400;
+}
+
+/* 날씨 정보 */
+.weather-info {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    pointer-events: none;
+}
+
+.weather-info.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.location {
+    font-size: 1.3rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.location-icon {
+    font-size: 1.5rem;
+}
+
+.temperature {
+    font-size: 5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 1rem 0;
+    text-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+}
+
+.weather-description {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(167, 139, 250, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.detail-icon {
+    font-size: 2rem;
+}
+
+.detail-info {
+    text-align: left;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+}
+
+.detail-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.api-source {
+    margin-top: 2rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* 로딩 오버레이 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 7, 20, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(167, 139, 250, 0.3);
+    border-top: 4px solid #a78bfa;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay p {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+}
+
+/* 에러 메시지 */
+.error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(239, 68, 68, 0.95);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 2000;
+    display: none;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+.error-message p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.error-message button {
+    background: white;
+    color: #dc2626;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.error-message button:hover {
+    transform: scale(1.05);
+}
+
+/* 푸터 */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .crystal-ball {
+        width: 300px;
+        height: 300px;
+    }
+
+    .ball-stand {
+        width: 220px;
+        height: 30px;
+    }
+
+    .temperature {
+        font-size: 3.5rem;
+    }
+
+    .weather-description {
+        font-size: 1.3rem;
+    }
+
+    .weather-details {
+        gap: 1rem;
+    }
+
+    .detail-item {
+        padding: 0.8rem 1rem;
+    }
+
+    .detail-icon {
+        font-size: 1.5rem;
+    }
+
+    .detail-value {
+        font-size: 1.1rem;
+    }
+
+    .progress-bar {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .crystal-ball {
+        width: 250px;
+        height: 250px;
+    }
+
+    .ball-stand {
+        width: 180px;
+        height: 25px;
+    }
+
+    .temperature {
+        font-size: 2.5rem;
+    }
+
+    .weather-details {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
